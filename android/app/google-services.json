@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "254976552229",
+    "project_id": "edutab-2096a",
+    "storage_bucket": "edutab-2096a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254976552229:android:bdc364d1aa73b552e0fecc",
+        "android_client_info": {
+          "package_name": "com.example.edutab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254976552229-jrnrf3qlc7gkt15av1acmh1oiougtj57.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edutab",
+            "certificate_hash": "bfe359312f6672142c2e715e8f2515b82197c317"
+          }
+        },
+        {
+          "client_id": "254976552229-ouedethh76diad56jdpb9sd9e06a3trr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe0PUTDqx9K4xfkASsu2m4Dbk4mkStHXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254976552229-ouedethh76diad56jdpb9sd9e06a3trr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254976552229-3db222n2bcu1hsc8s8jemt5ivlvgk687.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.edutab"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
