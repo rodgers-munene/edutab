@@ -6,10 +6,11 @@ class AppRoutes {
 
   // main routes
   static const String home = '/home';
+  static const String splashScreen = '/splashScreen';
 
   // teacher routes
   static const String teacherDashboard = '/teacher/dashboard';
-  static const String atthendanceMarking = '/teacher/attendance';
+  static const String attendanceMarking = '/teacher/attendance';
   static const String homeworkUpload = '/teacher/homework-upload';
   static const String notesCreation = '/teacher/notes';
   static const String announcements = '/teacher/announcements';
@@ -23,6 +24,4 @@ class AppRoutes {
   // shared routes
   static const String profile = '/profile';
   static const String schedule = '/schedule';
-
-
 }

@@ -1,3 +1,5 @@
+import 'package:edutab/navigation/splash_screen.dart';
+import 'package:edutab/screens/student/student_dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/constants/app_routes.dart';
 import '../screens/auth/login_screen.dart';
@@ -16,13 +18,12 @@ class AppRouter {
       case AppRoutes.roleSelection:
         return MaterialPageRoute(builder: (_) => RoleSelectionScreen());
 
-      case AppRoutes.home:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            appBar: AppBar(title: Text('Home')),
-            body: Center(child: Text('Dashboard Coming Soon')),
-          ),
-        );
+      case AppRoutes.splashScreen:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
+      
+      case AppRoutes.studentDashboard:
+        return MaterialPageRoute(builder: (_) => StudentDashboardScreen());
+      
       
        default:
         return MaterialPageRoute(
