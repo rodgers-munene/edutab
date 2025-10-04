@@ -26,7 +26,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      drawer: StudentDrawer(),
+      drawer: StudentDrawer(), 
       body: Center(child: Text("Welcome Student")),
     );
   }
