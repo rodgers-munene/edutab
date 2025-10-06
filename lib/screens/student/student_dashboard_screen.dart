@@ -1,5 +1,6 @@
 import 'package:edutab/providers/auth_provider.dart';
-import 'package:edutab/screens/student/student_drawer.dart';
+import 'package:edutab/widgets/dashboard/student_details_header.dart';
+import 'package:edutab/widgets/dashboard/student_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,16 +20,28 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final studentDetails = authProvider.currentUser;
+    final user = authProvider.currentUser;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.black),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 12),
+        child: SingleChildScrollView(        
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // student profile picture and details
+                StudentDetailsHeader(
+                  userName: user!.name,
+                  userClass: user.className ?? "",
+                ),
+        
+                const SizedBox(height: 40,),
+                // student summary section
+                StudentSummary() 
+             ],
+            ),
+          ),
       ),
-      drawer: StudentDrawer(), 
-      body: Center(child: Text("Welcome Student")),
     );
   }
-
 }

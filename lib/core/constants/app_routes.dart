@@ -7,6 +7,7 @@ class AppRoutes {
   // main routes
   static const String home = '/home';
   static const String splashScreen = '/splashScreen';
+  static const String bottomNavBar = '/bottom/navbar';
 
   // teacher routes
   static const String teacherDashboard = '/teacher/dashboard';

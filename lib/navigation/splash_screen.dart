@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (currentUser == null) {
       _navigateToLogin();
     } else {
-      _navigateBasedOnRole(currentUser.role);
+      _navigateToBottomNavbar(currentUser.role);
     }
   }
 
@@ -43,23 +43,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacementNamed(context, AppRoutes.login);
   }
 
-  void _navigateBasedOnRole(String role) {
-    String targetRoute;
-
-    switch (role) {
-      case "student":
-        targetRoute = AppRoutes.studentDashboard;
-        break;
-      case "teacher":
-        targetRoute = AppRoutes.teacherDashboard;
-        break;
-      default:
-        targetRoute = AppRoutes.login;
-    }
-
-    // navigate and remove all previous routes from stack
-    // prevents user from returning to splash screen
-    Navigator.pushNamedAndRemoveUntil(context, targetRoute, (route) => false);
+  void _navigateToBottomNavbar(String role) {
+    
+    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.bottomNavBar, (route) => false);
   }
 
   @override

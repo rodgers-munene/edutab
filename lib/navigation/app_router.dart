@@ -1,3 +1,4 @@
+import 'package:edutab/navigation/bottom_nav_bar.dart';
 import 'package:edutab/navigation/splash_screen.dart';
 import 'package:edutab/screens/student/student_dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,17 +21,17 @@ class AppRouter {
 
       case AppRoutes.splashScreen:
         return MaterialPageRoute(builder: (_) => SplashScreen());
-      
+
       case AppRoutes.studentDashboard:
         return MaterialPageRoute(builder: (_) => StudentDashboardScreen());
-      
-      
-       default:
+
+      case AppRoutes.bottomNavBar:
+        return MaterialPageRoute(builder: (_) => BottomNavBar());
+
+      default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
+            body: Center(child: Text('No route defined for ${settings.name}')),
           ),
         );
     }

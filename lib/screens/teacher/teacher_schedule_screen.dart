@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeworkUploadScreen extends StatelessWidget {
-  const HomeworkUploadScreen({super.key});
+class TeacherScheduleScreen extends StatelessWidget {
+  const TeacherScheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("Upload Homework"),
+        child: Text("Student Schedule"),
       ),
     );
   }

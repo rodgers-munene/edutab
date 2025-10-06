@@ -277,13 +277,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (mounted) {
         if (success) {
-          Navigator.pushReplacementNamed(context, AppRoutes.home);
+          Navigator.pushReplacementNamed(context, AppRoutes.bottomNavBar);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Row(
                 children: [
-                  Icon(Icons.error_outline, color: Colors.white),
+                  Icon(Icons.error_outline, color: Colors.grey.shade200),
                   SizedBox(width: 12),
                   Expanded(
                     child: Text(

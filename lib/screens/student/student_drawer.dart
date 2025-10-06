@@ -21,6 +21,9 @@ class _StudentDrawerState extends State<StudentDrawer> {
     final details = authProvider.currentUser;
 
     return Drawer(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero
+      ),
       child: SafeArea(
         child: Column(
           children: [
