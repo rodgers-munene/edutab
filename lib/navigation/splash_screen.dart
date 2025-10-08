@@ -1,52 +1,10 @@
-import 'package:edutab/core/constants/app_routes.dart';
-import 'package:edutab/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class SplashScreen extends StatefulWidget {
+
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _checkAuthAndNavigate();
-  }
-
-  Future<void> _checkAuthAndNavigate() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-
-    // delay to show splash screen animation
-    await Future.delayed(const Duration(seconds: 3));
-
-    // get the authproviders data
-    await authProvider.loadUserData();
-
-    // check if widget is still mounted
-    if (!mounted) return;
-
-    final currentUser = authProvider.currentUser;
-
-    // navigation based on auth state and user role
-    if (currentUser == null) {
-      _navigateToLogin();
-    } else {
-      _navigateToBottomNavbar(currentUser.role);
-    }
-  }
-
-  void _navigateToLogin() {
-    Navigator.pushReplacementNamed(context, AppRoutes.login);
-  }
-
-  void _navigateToBottomNavbar(String role) {
-    
-    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.bottomNavBar, (route) => false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,5 +82,4 @@ class _SplashScreenState extends State<SplashScreen> {
         )
      );
   }
-
 }

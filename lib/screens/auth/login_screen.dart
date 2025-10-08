@@ -73,10 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     'Sign in to continue',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
                   const SizedBox(height: 48),
 
@@ -192,8 +189,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 24,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
                               ),
                             )
                           : const Text(
@@ -233,10 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 15,
-                        ),
+                        style: TextStyle(color: Colors.grey[700], fontSize: 15),
                       ),
                       TextButton(
                         onPressed: () {
@@ -275,32 +270,28 @@ class _LoginScreenState extends State<LoginScreen> {
         _passwordController.text,
       );
 
-      if (mounted) {
-        if (success) {
-          Navigator.pushReplacementNamed(context, AppRoutes.bottomNavBar);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.error_outline, color: Colors.grey.shade200),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'Login failed. Please check your credentials.',
-                    ),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.red[700],
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: EdgeInsets.all(16),
+      if (!mounted) return;
+
+      if (!success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.error_outline, color: Colors.grey.shade200),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text('Login failed. Please check your credentials.'),
+                ),
+              ],
             ),
-          );
-        }
+            backgroundColor: Colors.red[700],
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            margin: EdgeInsets.all(16),
+          ),
+        );
       }
     }
   }

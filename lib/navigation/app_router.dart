@@ -1,3 +1,4 @@
+import 'package:edutab/navigation/auth_wrapper.dart';
 import 'package:edutab/navigation/bottom_nav_bar.dart';
 import 'package:edutab/navigation/splash_screen.dart';
 import 'package:edutab/screens/student/student_dashboard_screen.dart';
@@ -10,6 +11,8 @@ import '../screens/auth/role_selection_screen.dart';
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.authWrapper:
+        return MaterialPageRoute(builder: (_) => AuthWrapper());
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
 

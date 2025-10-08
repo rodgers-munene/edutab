@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
         // initial route
-        initialRoute: AppRoutes.splashScreen,
+        initialRoute: AppRoutes.authWrapper,
         // custom router
         onGenerateRoute: AppRouter.generateRoute,
       ),

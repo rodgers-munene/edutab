@@ -185,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       filled: true,
                       fillColor: Colors.grey[50],
                     ),
-                    value: _selectedClass,
+                    initialValue: _selectedClass,
                     items: _classes.map((className) {
                       return DropdownMenuItem(
                         value: className,
@@ -419,59 +419,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _handleRegister(AuthProvider authProvider) async {
-    if (_formKey.currentState!.validate()) {
-      final success = await authProvider.register(
-        _emailController.text.trim(),
-        _passwordController.text,
-        _nameController.text.trim(),
-        _selectedRole,
-        className: _selectedClass,
+  if (_formKey.currentState!.validate()) {
+    final success = await authProvider.register(
+      _emailController.text.trim(),
+      _passwordController.text,
+      _nameController.text.trim(),
+      _selectedRole,
+      className: _selectedClass,
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.check_circle, color: Colors.white),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text('Account created successfully!'),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.green[700],
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: EdgeInsets.all(16),
+        ),
       );
 
-      if (mounted) {
-        if (success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Text('Account created successfully!'),
-                  ),
-                ],
+      // No navigation here — let StreamBuilder handle it.
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.error_outline, color: Colors.white),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text('Registration failed. Please try again.'),
               ),
-              backgroundColor: Colors.green[700],
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: EdgeInsets.all(16),
-            ),
-          );
-          Navigator.pushReplacementNamed(context, AppRoutes.home);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.error_outline, color: Colors.white),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Text('Registration failed. Please try again.'),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.red[700],
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: EdgeInsets.all(16),
-            ),
-          );
-        }
-      }
+            ],
+          ),
+          backgroundColor: Colors.red[700],
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: EdgeInsets.all(16),
+        ),
+      );
     }
   }
+}
+
 }

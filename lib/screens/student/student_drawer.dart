@@ -21,9 +21,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
     final details = authProvider.currentUser;
 
     return Drawer(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: SafeArea(
         child: Column(
           children: [
@@ -73,7 +71,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                     ),
                   ),
                   Divider(color: Colors.grey.shade400),
-        
+
                   // drawer items
                   ListTile(
                     leading: const Icon(Icons.notifications),
@@ -98,7 +96,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
                 ],
               ),
             ),
-        
+
             // Bottom section (divider + logout)
             Column(
               children: [
@@ -107,10 +105,10 @@ class _StudentDrawerState extends State<StudentDrawer> {
                   leading: const Icon(Icons.logout, color: Colors.red),
                   title: const Text("Logout"),
                   onTap: () {
-                    // handle logout
+                    authProvider.signOut();
                   },
                 ),
-                SizedBox(height: 7,)
+                SizedBox(height: 7),
               ],
             ),
           ],
