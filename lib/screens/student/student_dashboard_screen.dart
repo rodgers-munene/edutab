@@ -1,6 +1,6 @@
 import 'package:edutab/providers/auth_provider.dart';
-import 'package:edutab/widgets/dashboard/student_details_header.dart';
-import 'package:edutab/widgets/dashboard/student_summary.dart';
+import 'package:edutab/widgets/common/single_title_headers.dart';
+import 'package:edutab/widgets/dashboard/student_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,31 +17,32 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
     super.initState();
   }
 
+  final List<Map<String, dynamic>> homeworks = [
+    {'subject': 'Math', 'submitted': true, 'dueDate': DateTime(2025, 10, 10)},
+    {'subject': 'English Essay', 'submitted': false, 'dueDate': DateTime(2025, 10, 13)},
+    {'subject': 'Science Project', 'submitted': false, 'dueDate': DateTime(2025, 10, 15)},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final user = authProvider.currentUser;
 
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12),
-        child: SingleChildScrollView(        
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // student profile picture and details
-                StudentDetailsHeader(
-                  userName: user!.name,
-                  userClass: user.className ?? "",
-                ),
-        
-                const SizedBox(height: 40,),
-                // student summary section
-                StudentSummary() 
-             ],
-            ),
-          ),
-      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // student info and stats
+            StudentInfo(userName: user!.name),
+
+            const SizedBox(height: 40,),
+            SingleTitleHeaders(title: "Announcements")
+            // announcements
+
+          ],
+        ),
+      )
     );
   }
 }

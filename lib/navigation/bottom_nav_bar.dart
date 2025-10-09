@@ -61,8 +61,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
+          elevation: 1,
+          title: Row(
+            children: [
+              const Icon(Icons.school, size: 29, color: Colors.blue,),
+              const SizedBox(width: 10,),
+              Text("Edu", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 22),),
+              Text("Tab", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 22),)
+            ],
+          ),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.notifications), iconSize: 28,)
+          ],
         ),
         body: screens[_selectedIndex],
         drawer: StudentDrawer(),
