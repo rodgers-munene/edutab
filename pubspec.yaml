@@ -52,6 +52,8 @@ flutter:
 
   assets:
     - assets/images/plane.png
+    - assets/images/task1.png
+    - assets/images/task2.png
     # - assets/icons/
   
   # Example for custom fonts (optional)

@@ -1,6 +1,7 @@
 import 'package:edutab/providers/auth_provider.dart';
 import 'package:edutab/widgets/common/announcements.dart';
 import 'package:edutab/widgets/common/single_title_headers.dart';
+import 'package:edutab/widgets/dashboard/pending_tasks.dart';
 import 'package:edutab/widgets/dashboard/student_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,9 +39,17 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
             StudentInfo(userName: user!.name),
 
             const SizedBox(height: 40,),
-            SingleTitleHeaders(title: "Announcements"),
             // announcements
+            SingleTitleHeaders(title: "Announcements"),
             Announcements(),
+
+            const SizedBox(height: 40,),
+            // pending tasks
+            SingleTitleHeaders(title: "Pending Tasks"),
+            const SizedBox(height: 10,),
+            PendingTasks(),
+            const SizedBox(height: 20,)
+
 
           ],
         ),
