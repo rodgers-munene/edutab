@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.1.0
   flutter_svg: ^2.0.9
+  carousel_slider: ^5.1.1
 
   # state management
   provider: ^6.1.1
