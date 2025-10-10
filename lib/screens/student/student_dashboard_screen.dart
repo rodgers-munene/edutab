@@ -3,6 +3,7 @@ import 'package:edutab/widgets/common/announcements.dart';
 import 'package:edutab/widgets/common/single_title_headers.dart';
 import 'package:edutab/widgets/dashboard/pending_tasks.dart';
 import 'package:edutab/widgets/dashboard/student_info.dart';
+import 'package:edutab/widgets/dashboard/watched_videos.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,13 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
             SingleTitleHeaders(title: "Pending Tasks"),
             const SizedBox(height: 10,),
             PendingTasks(),
-            const SizedBox(height: 20,)
+
+            const SizedBox(height: 40,),
+            // watched videos
+            SingleTitleHeaders(title: "Continue watching"),
+            const SizedBox(height: 10,),
+            WatchedVideos(),
+            const SizedBox(height: 40,),
 
 
           ],
