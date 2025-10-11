@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:edutab/providers/auth_provider.dart';
+import 'package:edutab/screens/shared/notification_screen.dart';
 import 'package:edutab/screens/shared/profile_screen.dart';
 import 'package:edutab/screens/student/homework_view_screen.dart';
 import 'package:edutab/screens/student/student_dashboard_screen.dart';
@@ -66,14 +67,36 @@ class _BottomNavBarState extends State<BottomNavBar> {
           elevation: 1,
           title: Row(
             children: [
-              const Icon(Icons.school, size: 29, color: Colors.blue,),
-              const SizedBox(width: 10,),
-              Text("Edu", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 22),),
-              Text("Tab", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 22),)
+              const Icon(Icons.school, size: 29, color: Colors.blue),
+              const SizedBox(width: 10),
+              Text(
+                "Edu",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 22,
+                ),
+              ),
+              Text(
+                "Tab",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              ),
             ],
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications), iconSize: 28,)
+            IconButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => NotificationsScreen()));
+              },
+              icon: Icon(Icons.notifications),
+              iconSize: 28,
+            ),
           ],
         ),
         body: screens[_selectedIndex],

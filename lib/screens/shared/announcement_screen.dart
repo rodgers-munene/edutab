@@ -41,7 +41,8 @@ class AnnouncementScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        foregroundColor: Colors.black,
+        title: Text("Announcements", style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
