@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:edutab/screens/shared/announcement_screen.dart';
 import 'package:flutter/material.dart';
 
 class Announcements extends StatefulWidget {
@@ -58,7 +59,10 @@ class _AnnouncementsState extends State<Announcements> {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 10,
+                  ),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -88,7 +92,10 @@ class _AnnouncementsState extends State<Announcements> {
                       Expanded(
                         child: Text(
                           item['message'],
-                          style: TextStyle(color: Colors.grey.shade800, height: 1.4),
+                          style: TextStyle(
+                            color: Colors.grey.shade800,
+                            height: 1.4,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -104,13 +111,22 @@ class _AnnouncementsState extends State<Announcements> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => AnnouncementScreen(),
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF011032),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
                             ),
                             child: const Text("View all"),
                           ),
