@@ -55,6 +55,11 @@ flutter:
     - assets/images/task1.png
     - assets/images/task2.png
     - assets/images/male_teacher.png
+    - assets/images/dsa.png
+    - assets/images/oop.png
+    - assets/images/os.png
+    - assets/images/web.png
+    - assets/images/database.png
     # - assets/icons/
   
   # Example for custom fonts (optional)

@@ -2,118 +2,182 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:edutab/providers/auth_provider.dart';
 
-class StudentDrawer extends StatefulWidget {
+class StudentDrawer extends StatelessWidget {
   const StudentDrawer({super.key});
-
-  @override
-  State<StudentDrawer> createState() => _StudentDrawerState();
-}
-
-class _StudentDrawerState extends State<StudentDrawer> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final details = authProvider.currentUser;
+    final width = MediaQuery.of(context).size.width;
 
     return Drawer(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      width: width * .85,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: SafeArea(
         child: Column(
           children: [
-            // Top section (header + items)
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
+            // ===== Drawer Header =====
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              child: Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Theme.of(context).highlightColor,
-                          child: Icon(
-                            Icons.person,
-                            size: 30,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          details?.name ?? "Loading..",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          details?.email ?? "",
-                          style: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          details?.className ?? "",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.school,
+                              size: 29,
+                              color: Colors.blue,
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              "Edu",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 22,
+                              ),
+                            ),
+                            Text(
+                              "Tab",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ),
-                  Divider(color: Colors.grey.shade400),
-
-                  // drawer items
-                  ListTile(
-                    leading: const Icon(Icons.notifications),
-                    title: const Text("Notifications"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text("Settings"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.help),
-                    title: const Text("Help"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.info),
-                    title: const Text("About"),
-                    onTap: () {},
                   ),
                 ],
               ),
             ),
 
-            // Bottom section (divider + logout)
+            const Divider(),
+
+            // ===== Class Items =====
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Divider(color: Colors.grey.shade400),
-                ListTile(
-                  leading: const Icon(Icons.logout, color: Colors.red),
-                  title: const Text("Logout"),
-                  onTap: () {
-                    authProvider.signOut();
-                  },
+                Container(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Classes",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                  ),
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 15,),
+                _buildClassItem(
+                  imgPath: "assets/images/dsa.png",
+                  text: "Data Structures",
+                  onTap: () {},
+                ),
+                _buildClassItem(
+                  imgPath: "assets/images/database.png",
+                  text: "Database Management",
+                  onTap: () {},
+                ),
+                _buildClassItem(
+                  imgPath: "assets/images/oop.png",
+                  text: "Object oriented Programming",
+                  onTap: () {},
+                ),
+                _buildClassItem(
+                  imgPath: "assets/images/os.png",
+                  text: "Operating Systems",
+                  onTap: () {},
+                ),
+                _buildClassItem(
+                  imgPath: "assets/images/web.png",
+                  text: "Web Development",
+                  onTap: () {},
+                ),
+                const Divider(color: Colors.grey,),
               ],
+            ),
+
+            // ===== Drawer Items =====
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  _buildDrawerItem(
+                    icon: Icons.calendar_today_sharp,
+                    text: "Timetable",
+                    onTap: () {},
+                  ),
+                  _buildDrawerItem(
+                    icon: Icons.settings,
+                    text: "Settings",
+                    onTap: () {},
+                  ),
+                  _buildDrawerItem(
+                    icon: Icons.help,
+                    text: "Help",
+                    onTap: () {},
+                  ),
+                  _buildDrawerItem(
+                    icon: Icons.logout,
+                    text: "Logout",
+                    color: Colors.red,
+                    onTap: () {
+                      authProvider.signOut();
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  ListTile _buildDrawerItem({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+    Color? color,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: color ?? Colors.black87),
+      title: Text(
+        text,
+        style: TextStyle(
+          color: color ?? Colors.black87,
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
+
+  ListTile _buildClassItem({
+    required String imgPath,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Image.asset(imgPath, height: 50, width: 50, fit: BoxFit.cover),
+      ),
+      title: Text(
+        text,
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onTap: onTap,
     );
   }
 }
