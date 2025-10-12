@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:edutab/providers/auth_provider.dart';
 import 'package:edutab/screens/shared/notification_screen.dart';
 import 'package:edutab/screens/shared/profile_screen.dart';
-import 'package:edutab/screens/student/homework_view_screen.dart';
+import 'package:edutab/screens/student/student_classes.dart';
 import 'package:edutab/screens/student/student_dashboard_screen.dart';
 import 'package:edutab/screens/student/student_drawer.dart';
 import 'package:edutab/screens/student/student_schedule_screen.dart';
@@ -45,15 +45,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ? StudentDashboardScreen()
         : TeacherDashboardScreen();
 
-    final Widget homework = authProvider.currentUser!.role == "student"
-        ? HomeworkViewScreen()
+    final Widget classes = authProvider.currentUser!.role == "student"
+        ? StudentClasses()
         : HomeworkUploadScreen();
 
     final Widget schedule = authProvider.currentUser!.role == "student"
         ? StudentScheduleScreen()
         : TeacherScheduleScreen();
 
-    final List screens = [dashboard, homework, schedule, ProfileScreen()];
+    final List screens = [dashboard, classes, schedule, ProfileScreen()];
 
     return PopScope(
       canPop: false,
@@ -117,8 +117,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               label: "Dashboard",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.assignment),
-              label: "Homework",
+              icon: Icon(Icons.school),
+              label: "Classes",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
