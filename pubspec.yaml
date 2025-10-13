@@ -17,6 +17,7 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_svg: ^2.0.9
   carousel_slider: ^5.1.1
+  font_awesome_flutter: ^10.7.0
 
   # state management
   provider: ^6.1.1
@@ -61,6 +62,8 @@ flutter:
     - assets/images/web.png
     - assets/images/database.png
     - assets/images/teacher_profile.png
+    - assets/images/test_image.png
+    - assets/images/material_image.png
     # - assets/icons/
   
   # Example for custom fonts (optional)

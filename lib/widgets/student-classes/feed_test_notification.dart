@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TeacherPost extends StatelessWidget {
-  const TeacherPost({super.key});
+class FeedTestNotification extends StatelessWidget {
+  const FeedTestNotification({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,29 +16,25 @@ class TeacherPost extends StatelessWidget {
             color: Colors.black12,
             blurRadius: 6,
             spreadRadius: 2,
-            offset: Offset(0, 3)
-          )
-        ]
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         children: [
+          // header part
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    child: Image.asset(
-                      "assets/images/teacher_profile.png",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  CircleAvatar(child: Icon(FontAwesomeIcons.award)),
                   const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ms Nazneen Ansari",
+                        "New Test",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -56,33 +53,44 @@ class TeacherPost extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
-                  "Teacher",
+                  "New",
                   style: TextStyle(color: Colors.white, fontSize: 13),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            "Hello Students, \nThe Data Structures and Algorithms lecture for today has been cancelled, we will catch up next week, until then I request you to read the material I have posted. \nHave a good week!",
-          ),
-          Row(
-            children: [
-              Text("2", style: TextStyle(fontSize: 18, color: Colors.blueGrey)),
-              const SizedBox(width: 3),
-              Icon(Icons.message, size: 18, color: Colors.blueGrey,),
-            ],
-          ),
-          Divider(),
+          
+          // body part with image
           Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+            margin: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blueGrey),
+              borderRadius: BorderRadius.circular(12)
+            ),
             child: Row(
               children: [
-                Expanded(child: Text("Comment")),
-                IconButton(onPressed: () {}, icon: Icon(Icons.send)),
+                Image.asset("assets/images/test_image.png", fit: BoxFit.cover),
+                const SizedBox(width: 10,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.withOpacity(.5)
+                        ),
+                        child: Text("Due: 27th Oct 2025", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
+                      ),
+                      Text("Mid Term: DSA", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+                      Text("Ms Nazneen Ansari", style: TextStyle(color: Colors.blueGrey, fontSize: 14),)
+                    ],
+                )
+                
               ],
+
             ),
-          ),
+          )
         ],
       ),
     );

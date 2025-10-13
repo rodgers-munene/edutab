@@ -1,3 +1,5 @@
+import 'package:edutab/widgets/student-classes/feed_material_notification.dart';
+import 'package:edutab/widgets/student-classes/feed_test_notification.dart';
 import 'package:edutab/widgets/student-classes/teacher_post.dart';
 import 'package:flutter/material.dart';
 
@@ -6,17 +8,26 @@ class FeedTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        // latest post from the students teachers
-        TeacherPost(),
-        // new test notification
-
-        // new material notification
-
-        // Another test notification
-
-      ],
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.all(12),
+        child: Column(
+          children: [
+            // latest post from the students teachers
+            TeacherPost(),
+            const SizedBox(height: 30,),
+            // new test notification
+            FeedTestNotification(),
+            const SizedBox(height: 30,),
+            // new material notification
+            FeedMaterialNotification(),
+            const SizedBox(height: 30,),
+            // Another test notification
+            FeedTestNotification(),
+            const SizedBox(height: 30,),
+          ],
+        ),
+      ),
     );
   }
 }
