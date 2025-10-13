@@ -1,3 +1,4 @@
+import 'package:edutab/screens/student/classes/feed_tab.dart';
 import 'package:flutter/material.dart';
 
 class StudentClasses extends StatelessWidget {
@@ -33,7 +34,7 @@ class StudentClasses extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text("Feed Page")),
+            FeedTab(),
             Center(child: Text("Task Page")),
             Center(child: Text("Material Page")),
             Center(child: Text("Tests Page")),

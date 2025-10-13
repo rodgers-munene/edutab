@@ -60,6 +60,7 @@ flutter:
     - assets/images/os.png
     - assets/images/web.png
     - assets/images/database.png
+    - assets/images/teacher_profile.png
     # - assets/icons/
   
   # Example for custom fonts (optional)
