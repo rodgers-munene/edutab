@@ -17,13 +17,13 @@ class FeedTab extends StatelessWidget {
             TeacherPost(),
             const SizedBox(height: 30,),
             // new test notification
-            FeedTestNotification(),
+            FeedTestNotification(testTitle: "Mid Term Task 1", teacher: "Ms Nazneen Ansari",),
             const SizedBox(height: 30,),
             // new material notification
             FeedMaterialNotification(),
             const SizedBox(height: 30,),
             // Another test notification
-            FeedTestNotification(),
+            FeedTestNotification(testTitle: "Mid Term Task 1", teacher: "Ms Nazneen Ansari",),
             const SizedBox(height: 30,),
           ],
         ),

@@ -1,4 +1,6 @@
 import 'package:edutab/screens/student/classes/feed_tab.dart';
+import 'package:edutab/screens/student/classes/material_tab.dart';
+import 'package:edutab/screens/student/classes/task_tab.dart';
 import 'package:flutter/material.dart';
 
 class StudentClasses extends StatelessWidget {
@@ -25,7 +27,7 @@ class StudentClasses extends StatelessWidget {
                   _CustomTab(icon: Icons.dynamic_feed, text: "Feed"),
                   _CustomTab(icon: Icons.task, text: "Task"),
                   _CustomTab(icon: Icons.menu_book, text: "Material"),
-                  _CustomTab(icon: Icons.quiz, text: "Tests"),
+                  // _CustomTab(icon: Icons.quiz, text: "Tests"),
                   _CustomTab(icon: Icons.play_circle_fill, text: "Clips"),
                 ],
               ),
@@ -35,9 +37,9 @@ class StudentClasses extends StatelessWidget {
         body: const TabBarView(
           children: [
             FeedTab(),
-            Center(child: Text("Task Page")),
-            Center(child: Text("Material Page")),
-            Center(child: Text("Tests Page")),
+            TaskTab(),
+            MaterialTab(),
+            // Center(child: Text("Tests Page")),
             Center(child: Text("Clips Page")),
           ],
         ),

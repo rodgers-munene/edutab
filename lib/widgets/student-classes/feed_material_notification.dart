@@ -6,69 +6,134 @@ class FeedMaterialNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color accentColor = Colors.blueAccent;
+
     return Container(
-      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.blueGrey),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 6,
-            spreadRadius: 2,
             offset: Offset(0, 3),
           ),
         ],
       ),
-      child: Column(
-        children: [
-          // header part
-          Row(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        // splashColor: accentColor.withOpacity(0.1),
+        // highlightColor: accentColor.withOpacity(0.05),
+        onTap: () {
+          // print("Material tapped!");
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(child: Icon(FontAwesomeIcons.book)),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              // 🔹 Header
+              Row(
                 children: [
-                  Text(
-                    "New Material",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  CircleAvatar(
+                    backgroundColor: accentColor.withOpacity(0.1),
+                    child: Icon(
+                      FontAwesomeIcons.book,
+                      color: accentColor,
+                      size: 18,
+                    ),
                   ),
-                  Text(
-                    "Posted on 30th September",
-                    style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "New Material",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                        ),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        "Posted on 30th September",
+                        style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 14),
+
+              // Material Preview
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blueGrey),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey.shade50,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Thumbnail image
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        "assets/images/material_image.png",
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+
+                    // Details
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Chapter 1: Introduction to Data Structures",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Ms. Nazneen Ansari",
+                            style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 13.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              // Footer Actions (optional future)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.download, size: 18),
+                    label: const Text("Download"),
+                    style: TextButton.styleFrom(foregroundColor: accentColor),
                   ),
                 ],
               ),
             ],
           ),
-          
-          // body part with image
-          Container(
-            margin: const EdgeInsets.all(12),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.blueGrey),
-              borderRadius: BorderRadius.circular(12)
-            ),
-            child: Row(
-              children: [
-                Image.asset("assets/images/material_image.png", fit: BoxFit.cover),
-                const SizedBox(width: 10,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Chapter 1", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
-                      Text("Ms Nazneen Ansari", style: TextStyle(color: Colors.blueGrey, fontSize: 14),),
-                      Text("30th Oct 2025", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
-                    ],
-                )
-                
-              ],
-
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
