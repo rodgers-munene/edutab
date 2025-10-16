@@ -64,6 +64,7 @@ flutter:
     - assets/images/teacher_profile.png
     - assets/images/test_image.png
     - assets/images/material_image.png
+    - assets/images/owl.png
     # - assets/icons/
   
   # Example for custom fonts (optional)

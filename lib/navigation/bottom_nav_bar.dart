@@ -4,6 +4,7 @@ import 'package:edutab/screens/shared/notification_screen.dart';
 import 'package:edutab/screens/shared/profile_screen.dart';
 import 'package:edutab/screens/student/classes/student_classes_screen.dart';
 import 'package:edutab/screens/student/dashboard/student_dashboard_screen.dart';
+import 'package:edutab/screens/student/profile/student_profile_screen.dart';
 import 'package:edutab/screens/student/student_drawer.dart';
 import 'package:edutab/screens/student/schedule/student_schedule_screen.dart';
 import 'package:edutab/screens/teacher/homework_upload_screen.dart';
@@ -53,7 +54,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ? StudentScheduleScreen()
         : TeacherScheduleScreen();
 
-    final List screens = [dashboard, classes, schedule, ProfileScreen()];
+    final Widget profile = authProvider.currentUser!.role == "student"
+        ? StudentProfileScreen()
+        : ProfileScreen();
+
+    final List screens = [dashboard, classes, schedule, profile];
 
     return PopScope(
       canPop: false,
@@ -90,9 +95,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => NotificationsScreen()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => NotificationsScreen()),
+                );
               },
               icon: Icon(Icons.notifications),
               iconSize: 28,
@@ -116,10 +121,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.dashboard),
               label: "Dashboard",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: "Classes",
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.school), label: "Classes"),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
               label: "Schedule",
