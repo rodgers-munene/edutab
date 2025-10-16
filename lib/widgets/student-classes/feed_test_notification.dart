@@ -1,3 +1,4 @@
+import 'package:edutab/screens/student/classes/task_details_page.dart';
 import 'package:flutter/material.dart';
 
 class FeedTestNotification extends StatelessWidget {
@@ -56,7 +57,10 @@ class FeedTestNotification extends StatelessWidget {
             children: [
               // Due date tag
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
                   color: accentColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -107,13 +111,15 @@ class FeedTestNotification extends StatelessWidget {
             children: [
               Text(
                 teacher,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
-                ),
+                style: const TextStyle(color: Colors.grey, fontSize: 14),
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => TaskDetailsPage()),
+                  );
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: accentColor.withOpacity(0.1),
                   shape: RoundedRectangleBorder(
