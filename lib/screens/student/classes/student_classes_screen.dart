@@ -1,3 +1,4 @@
+import 'package:edutab/screens/student/classes/clips_tab.dart';
 import 'package:edutab/screens/student/classes/feed_tab.dart';
 import 'package:edutab/screens/student/classes/material_tab.dart';
 import 'package:edutab/screens/student/classes/task_tab.dart';
@@ -40,7 +41,7 @@ class StudentClasses extends StatelessWidget {
             TaskTab(),
             MaterialTab(),
             // Center(child: Text("Tests Page")),
-            Center(child: Text("Clips Page")),
+            ClipsTab(),
           ],
         ),
       ),

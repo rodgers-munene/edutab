@@ -1,4 +1,5 @@
 import 'package:edutab/providers/auth_provider.dart';
+import 'package:edutab/widgets/common/profile_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +58,8 @@ class StudentProfileScreen extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(height: 30,),
+              ProfileTiles()
             ],
           ),
         ),
