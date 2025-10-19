@@ -193,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        _selectedClass = value;
+                        _selectedClass = value!;
                       });
                     },
                     validator: (value) {
@@ -424,7 +424,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _passwordController.text,
       _nameController.text.trim(),
       _selectedRole,
-      className: _selectedClass,
+      _selectedClass ?? '',
     );
 
     if (!mounted) return;

@@ -48,13 +48,13 @@ Future<bool> register(
   String password, 
   String name, 
   String role,
-  {String? className}
+  String className
 ) async {
   _isLoading = true;
   notifyListeners();
   
   try {
-    await _authService.register(email, password, name, role, className: className);
+    await _authService.register(email, password, name, role, className);
     await loadUserData();
     _isLoading = false;
     notifyListeners();
