@@ -4,11 +4,15 @@ import 'package:edutab/models/class_model.dart';
 class ClassService {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<ClassModel?> getClassById(String id) async {
+  Future<ClassModel?> getClassByName(String className) async {
     try {
-      final doc = await _firestore.collection('classes').doc(id).get();
-      if (doc.exists) {
-        return ClassModel.fromMap(doc.data()!, doc.id);
+      final doc = await _firestore
+          .collection('classes')
+          .where("className", isEqualTo: className)
+          .get();
+      if (doc.docs.isNotEmpty) {
+        final classDoc = doc.docs.first;
+        return ClassModel.fromMap(classDoc.data(), classDoc.id);
       }
 
       return null;
@@ -60,7 +64,7 @@ class ClassService {
     try {
       final classRef = _firestore.collection('classes').doc(classId);
       await classRef.update({
-        'studentIds': FieldValue.arrayUnion([studentId]),
+        'studentsIds': FieldValue.arrayRemove([studentId]), // Corrected
       });
     } catch (e) {
       print("Error removing student: $e");
@@ -78,6 +82,29 @@ class ClassService {
           .toList();
     } catch (e) {
       print("Error fetching classes by grade: $e");
+      return [];
+    }
+  }
+
+  Future<List<String>> getSubjectsByClassName(String className) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection('classes')
+          .where('className', isEqualTo: className)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final doc = querySnapshot.docs.first;
+        final data = doc.data();
+        final lessons = List<String>.from(data['subjects'] ?? []);
+        return lessons;
+      } else {
+        print("No class found for name $className");
+        return [];
+      }
+    } catch (e) {
+      print("Error fetching student's lessons: $e");
       return [];
     }
   }

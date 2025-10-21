@@ -1,3 +1,4 @@
+import 'package:edutab/providers/class_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:edutab/providers/auth_provider.dart';
@@ -8,6 +9,9 @@ class StudentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final classProvider = Provider.of<ClassProvider>(context, listen: false);
+    final studentSubjects = classProvider.subjects;
+
     final width = MediaQuery.of(context).size.width;
 
     return Drawer(
@@ -72,33 +76,15 @@ class StudentDrawer extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                   ),
                 ),
-                const SizedBox(height: 15,),
-                _buildClassItem(
-                  imgPath: "assets/images/dsa.png",
-                  text: "Data Structures",
-                  onTap: () {},
-                ),
-                _buildClassItem(
-                  imgPath: "assets/images/database.png",
-                  text: "Database Management",
-                  onTap: () {},
-                ),
-                _buildClassItem(
-                  imgPath: "assets/images/oop.png",
-                  text: "Object oriented Programming",
-                  onTap: () {},
-                ),
-                _buildClassItem(
-                  imgPath: "assets/images/os.png",
-                  text: "Operating Systems",
-                  onTap: () {},
-                ),
-                _buildClassItem(
-                  imgPath: "assets/images/web.png",
-                  text: "Web Development",
-                  onTap: () {},
-                ),
-                const Divider(color: Colors.grey,),
+                const SizedBox(height: 15),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: studentSubjects.length,
+                  itemBuilder: (context, index) {
+                    final subject = studentSubjects[index];
+                    return _buildClassItem(imgPath: "assets/images/dsa.png", text: subject, onTap: () {});
+                }),
+                const Divider(color: Colors.grey),
               ],
             ),
 

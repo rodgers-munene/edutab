@@ -1,5 +1,4 @@
 import 'package:edutab/providers/auth_provider.dart';
-import 'package:edutab/providers/class_provider.dart';
 import 'package:edutab/widgets/common/announcements.dart';
 import 'package:edutab/widgets/common/single_title_headers.dart';
 import 'package:edutab/widgets/dashboard/pending_tasks.dart';
