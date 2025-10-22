@@ -11,97 +11,130 @@ class StudentInfo extends StatelessWidget {
     final width = size.width;
 
     return SizedBox(
-      height: 190, 
+      height: 210,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
+          // Header section
           Container(
-            padding: const EdgeInsets.only(top: 22, left: 12, bottom: 12, right: 12),
-            height: 150,
+            height: 140,
             decoration: const BoxDecoration(
-              color: Color(0xFF011032),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(70),
-                bottomRight: Radius.circular(10),
+              gradient: LinearGradient(
+                colors: [Color(0xFF011032), Color(0xFF083D8C)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(60),
+                bottomRight: Radius.circular(20),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 8,
+                  offset: Offset(0, 3),
+                ),
+              ],
             ),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(radius: 35, child: Icon(Icons.school, size: 30)),
-                const SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Welcome,",
-                      style: TextStyle(
-                        fontSize: 21,
-                        color: Colors.grey.shade400,
-                        fontWeight: FontWeight.w600,
-                      ),
+                // Avatar
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF1C3FAA), Color(0xFF00C6FB)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    Text(
-                      userName,
-                      style: const TextStyle(
-                        fontSize: 21,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  child: const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(Icons.school, color: Colors.white, size: 34),
+                  ),
                 ),
-                const Spacer(),
-                Image.asset('assets/images/plane.png'),
+                const SizedBox(width: 16),
+                // Welcome text
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Welcome Back,",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
+                      Text(
+                        userName,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+                // Optional top-right image
+                Image.asset(
+                  'assets/images/plane.png',
+                  height: 55,
+                ),
               ],
             ),
           ),
 
-          // Positioned container peeking above
+          // Floating stats card
           Positioned(
-            bottom: -20, 
-            right: 0,
+            bottom: -25,
+            left: 0,
             child: Container(
-              width: width * .9,
-              padding: EdgeInsets.all(8.0),
+              width: width * 0.9,
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white, 
-                borderRadius: BorderRadius.circular(6.0),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.blue.withOpacity(0.3),
-                    spreadRadius: 3,
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
+                    color: Colors.blue.withOpacity(0.15),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6),
                   ),
                 ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.calendar_month, color: Colors.green,),
-                      Text("75%", style: TextStyle(color: Colors.green, fontSize: 23, fontWeight: FontWeight.bold),),
-                      Text("Attendance", style: TextStyle(color: Colors.green, fontSize:  14, fontWeight: FontWeight.bold), )
-                    ],
+                  _buildStatCard(
+                    icon: Icons.calendar_month,
+                    color: Colors.green,
+                    value: "75%",
+                    label: "Attendance",
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.check_box, color: Colors.orangeAccent,),
-                      Text("08", style: TextStyle(color: Colors.orangeAccent, fontSize: 23, fontWeight: FontWeight.bold),),
-                      Text("Pending tasks", style: TextStyle(color: Colors.orangeAccent, fontSize:  14, fontWeight: FontWeight.bold), )
-                    ],
+                  _buildStatCard(
+                    icon: Icons.check_box,
+                    color: Colors.orangeAccent,
+                    value: "08",
+                    label: "Pending Tasks",
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.personal_video, color: Colors.blue,),
-                      Text("02", style: TextStyle(color: Colors.blue, fontSize: 23, fontWeight: FontWeight.bold),),
-                      Text("Live Lectures", style: TextStyle(color: Colors.blue, fontSize:  14, fontWeight: FontWeight.bold), )
-                    ],
+                  _buildStatCard(
+                    icon: Icons.personal_video,
+                    color: Colors.blue,
+                    value: "02",
+                    label: "Live Lectures",
                   ),
                 ],
               ),
@@ -109,6 +142,44 @@ class StudentInfo extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required Color color,
+    required String value,
+    required String label,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: color, size: 22),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: TextStyle(
+            color: color,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey.shade600,
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }

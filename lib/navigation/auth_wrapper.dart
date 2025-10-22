@@ -42,6 +42,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
               await authProvider.loadUserData();
               if (authProvider.currentUser != null) {
                 classProvider.loadSubjects(authProvider.currentUser!.className);
+                classProvider.loadClass(authProvider.currentUser!.className);
               }
             });
           }

@@ -1,7 +1,7 @@
 import 'package:edutab/navigation/auth_wrapper.dart';
 import 'package:edutab/navigation/bottom_nav_bar.dart';
 import 'package:edutab/navigation/splash_screen.dart';
-import 'package:edutab/screens/student/dashboard/student_dashboard_screen.dart';
+import 'package:edutab/screens/student/dashboard/student_dashboard.dart';
 import 'package:flutter/material.dart';
 import '../core/constants/app_routes.dart';
 import '../screens/auth/login_screen.dart';
@@ -26,7 +26,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SplashScreen());
 
       case AppRoutes.studentDashboard:
-        return MaterialPageRoute(builder: (_) => StudentDashboardScreen());
+        return MaterialPageRoute(builder: (_) => StudentDashboard());
 
       case AppRoutes.bottomNavBar:
         return MaterialPageRoute(builder: (_) => BottomNavBar());

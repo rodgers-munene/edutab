@@ -8,6 +8,13 @@ class StudentDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> images = [
+      "assets/images/dsa.png", 
+      "assets/images/database.png",
+      "assets/images/oop.png",
+      "assets/images/os.png",
+      "assets/images/web.png"
+      ];
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final classProvider = Provider.of<ClassProvider>(context, listen: false);
     final studentSubjects = classProvider.subjects;
@@ -79,11 +86,16 @@ class StudentDrawer extends StatelessWidget {
                 const SizedBox(height: 15),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: studentSubjects.length,
+                  itemCount: images.length,
                   itemBuilder: (context, index) {
                     final subject = studentSubjects[index];
-                    return _buildClassItem(imgPath: "assets/images/dsa.png", text: subject, onTap: () {});
-                }),
+                    return _buildClassItem(
+                      imgPath: images[index],
+                      text: subject,
+                      onTap: () {},
+                    );
+                  },
+                ),
                 const Divider(color: Colors.grey),
               ],
             ),
@@ -93,11 +105,11 @@ class StudentDrawer extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  _buildDrawerItem(
-                    icon: Icons.calendar_today_sharp,
-                    text: "Timetable",
-                    onTap: () {},
-                  ),
+                  // _buildDrawerItem(
+                  //   icon: Icons.calendar_today_sharp,
+                  //   text: "Timetable",
+                  //   onTap: () {},
+                  // ),
                   _buildDrawerItem(
                     icon: Icons.settings,
                     text: "Settings",

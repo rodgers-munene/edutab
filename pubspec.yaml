@@ -36,10 +36,11 @@ dependencies:
 
   # Network & Loading
   http: ^1.2.0
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.1
   flutter_spinkit: ^5.2.0
   intl: ^0.20.2
   webview_flutter: ^4.13.0
+  url_launcher: ^6.3.2
   
 
 
