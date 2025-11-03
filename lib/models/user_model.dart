@@ -3,7 +3,8 @@ class UserModel {
   final String name;
   final String email;
   final String role;
-  final String className;
+  final String className; // Make sure this exists
+  // ... other properties
 
   UserModel({
     required this.id,
@@ -11,6 +12,7 @@ class UserModel {
     required this.email,
     required this.role,
     required this.className,
+    // ... other properties
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map, String id) {
@@ -19,7 +21,10 @@ class UserModel {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       role: map['role'] ?? '',
-      className: map['className']?? '',
+      className: map['className'] ?? '',
+      // ... other properties
     );
   }
+
+  // ... rest of the class implementation
 }

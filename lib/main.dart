@@ -2,6 +2,10 @@ import 'package:edutab/core/constants/app_routes.dart';
 import 'package:edutab/core/theme/app_theme.dart';
 import 'package:edutab/navigation/app_router.dart';
 import 'package:edutab/providers/class_provider.dart';
+import 'package:edutab/providers/material_provider.dart';
+import 'package:edutab/providers/progress_provider.dart';
+import 'package:edutab/providers/task_provider.dart';
+import 'package:edutab/providers/video_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +24,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider()), ChangeNotifierProvider(create: (_) => ClassProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ClassProvider()),
+        ChangeNotifierProvider(create: (_) => TaskProvider()),
+        ChangeNotifierProvider(create: (_) => MaterialProvider()),
+        ChangeNotifierProvider(create: (_) => VideoProvider()),
+        ChangeNotifierProvider(create: (_) => ProgressProvider()),
+      ],
       child: MaterialApp(
         title: 'Edu Tab',
         theme: AppTheme.lightTheme,

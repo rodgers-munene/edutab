@@ -1,7 +1,7 @@
-import 'package:edutab/screens/student/classes/student_classes.dart';
-import 'package:edutab/screens/student/materials/student_materials.dart';
-import 'package:edutab/screens/student/progress/student_progress.dart';
-import 'package:edutab/screens/student/tasks/student_tasks.dart';
+import 'package:edutab/screens/student/classes/classes_screen.dart';
+import 'package:edutab/screens/student/materials/materials_screen.dart';
+import 'package:edutab/screens/student/progress/progress_screen.dart';
+import 'package:edutab/screens/student/tasks/tasks_screen.dart';
 import 'package:edutab/screens/student/videos/student_videos.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,7 @@ class StudentNavigationGrid extends StatelessWidget {
         color: Colors.blue.shade100,
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const StudentClasses()),
+          MaterialPageRoute(builder: (_) => const ClassesScreen()),
         ),
       ),
       DashboardGridItem(
@@ -42,7 +42,7 @@ class StudentNavigationGrid extends StatelessWidget {
         color: Colors.green.shade100,
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const StudentTasks()),
+          MaterialPageRoute(builder: (_) => const TasksScreen()),
         ),
       ),
       DashboardGridItem(
@@ -51,7 +51,7 @@ class StudentNavigationGrid extends StatelessWidget {
         color: Colors.orange.shade100,
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const StudentMaterials()),
+          MaterialPageRoute(builder: (_) => const MaterialsScreen()),
         ),
       ),
       DashboardGridItem(
@@ -69,7 +69,7 @@ class StudentNavigationGrid extends StatelessWidget {
         color: Colors.red.shade100,
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const StudentProgress()),
+          MaterialPageRoute(builder: (_) => const ProgressScreen()),
         ),
       ),
     ];

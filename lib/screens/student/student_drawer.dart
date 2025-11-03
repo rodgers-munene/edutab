@@ -17,7 +17,6 @@ class StudentDrawer extends StatelessWidget {
       ];
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final classProvider = Provider.of<ClassProvider>(context, listen: false);
-    final studentSubjects = classProvider.subjects;
 
     final width = MediaQuery.of(context).size.width;
 
@@ -73,32 +72,32 @@ class StudentDrawer extends StatelessWidget {
             const Divider(),
 
             // ===== Class Items =====
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Classes",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    final subject = studentSubjects[index];
-                    return _buildClassItem(
-                      imgPath: images[index],
-                      text: subject,
-                      onTap: () {},
-                    );
-                  },
-                ),
-                const Divider(color: Colors.grey),
-              ],
-            ),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     Container(
+            //       padding: EdgeInsets.only(left: 20),
+            //       child: Text(
+            //         "Classes",
+            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+            //       ),
+            //     ),
+            //     const SizedBox(height: 15),
+            //     ListView.builder(
+            //       shrinkWrap: true,
+            //       itemCount: images.length,
+            //       itemBuilder: (context, index) {
+            //         final subject = studentSubjects[index];
+            //         return _buildClassItem(
+            //           imgPath: images[index],
+            //           text: subject,
+            //           onTap: () {},
+            //         );
+            //       },
+            //     ),
+            //     const Divider(color: Colors.grey),
+            //   ],
+            // ),
 
             // ===== Drawer Items =====
             Expanded(

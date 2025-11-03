@@ -50,14 +50,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
         : HomeworkUploadScreen();
 
     final Widget schedule = authProvider.currentUser!.role == "student"
-        ? StudentScheduleScreen()
+        ? ScheduleScreen()
         : TeacherScheduleScreen();
 
     final Widget profile = authProvider.currentUser!.role == "student"
         ? StudentProfileScreen()
         : ProfileScreen();
 
-    final List screens = [dashboard, classes, schedule, profile];
+    final List screens = [dashboard, schedule, profile];
 
     return PopScope(
       canPop: false,
@@ -120,7 +120,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.dashboard),
               label: "Dashboard",
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: "Classes"),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
               label: "Schedule",

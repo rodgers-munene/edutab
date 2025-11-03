@@ -1,142 +1,216 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
-class ScheduleList extends StatelessWidget {
-  const ScheduleList({super.key});
+// --- 1. NEW DATA MODEL ---
+// This is a local Dart class to represent a single entry in your timetable.
+// You will fetch data from Firebase and map it to this model.
+class TimetableEntry {
+  final String subject;
+  final String teacherName;
+  final String startTime;
+  final String endTime;
+  final Color color;
 
-  @override
-  Widget build(BuildContext context) {
-    final lessons = [
-      {
-        "time": "08:00 am",
-        "title": "Data Analysis and Algorithms Live Class",
-        "link": "googlemeet.eduhoot.com",
-        "teacher": "Ms Nazneen Ansari",
-        "timeRange": "8:30 am - 9:30 am",
-        "color": Colors.cyanAccent,
-      },
-      {
-        "time": "09:00 am",
-        "title": "Web Development Live Class",
-        "link": "googlemeet.eduhoot.com",
-        "teacher": "Mrs Kristin Watson",
-        "timeRange": "9:30 am - 10:30 am",
-        "color": Colors.orangeAccent,
-      },
-      {
-        "time": "10:00 am",
-        "title": "Database Management Live Class",
-        "link": "googlemeet.eduhoot.com",
-        "teacher": "Mr Robert Fox",
-        "timeRange": "10:30 am - 11:30 am",
-        "color": Colors.redAccent,
-      },
-      {
-        "time": "12:00 pm",
-        "title": "Web Development: Task submission due today",
-        "link": "googlemeet.eduhoot.com",
-        "teacher": "Ms Natalie Brown",
-        "timeRange": "12:00 pm - 12:30 pm",
-        "color": Colors.purpleAccent,
-      },
-    ];
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: lessons.map((lesson) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 24, top: 8),
-                child: Text(
-                  lesson["time"] as String,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-              LessonCard(
-                title: lesson["title"] as String,
-                link: lesson["link"] as String,
-                teacher: lesson["teacher"] as String,
-                timeRange: lesson["timeRange"] as String,
-                backgroundColor: lesson["color"] as Color,
-              ),
-            ],
-          );
-        }).toList(),
-      ),
-    );
-  }
+  TimetableEntry({
+    required this.subject,
+    required this.teacherName,
+    required this.startTime,
+    required this.endTime,
+    required this.color,
+  });
 }
 
-class LessonCard extends StatelessWidget {
-  final String title;
-  final String link;
-  final String teacher;
-  final String timeRange;
-  final Color backgroundColor;
 
-  const LessonCard({
+class DailyTimetableView extends StatelessWidget {
+  final List<TimetableEntry> lessons;
+  final String day;
+
+  const DailyTimetableView({
     super.key,
-    required this.title,
-    required this.link,
-    required this.teacher,
-    required this.timeRange,
-    required this.backgroundColor,
+    required this.lessons,
+    required this.day,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    if (lessons.isEmpty) {
+      return Center(
+        child: Text(
+          'No classes scheduled for this day.',
+          style: TextStyle(color: Colors.grey[700], fontSize: 16),
+        ),
+      );
+    }
+
+    // A clean list of TimetableCards
+    return ListView.builder(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: backgroundColor.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-          ),
-          const SizedBox(height: 6),
-          Row(
-            children: [
-              const Text(
-                "Link: ",
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              Expanded(
-                child: Text(
-                  link,
-                  style: TextStyle(
-                    color: Colors.blue.shade900,
-                    decoration: TextDecoration.underline,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+      itemCount: lessons.length,
+      itemBuilder: (context, index) {
+        return TimetableCard(lesson: lessons[index]);
+      },
+    );
+  }
+}
+
+// --- 4. REDESIGNED CARD WIDGET ---
+// This replaces your old LessonCard with a cleaner, more professional look.
+class TimetableCard extends StatelessWidget {
+  final TimetableEntry lesson;
+
+  const TimetableCard({super.key, required this.lesson});
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shadowColor: Colors.black.withOpacity(0.05),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // --- The colored vertical bar ---
+            Container(
+              width: 12,
+              decoration: BoxDecoration(
+                color: lesson.color.withOpacity(0.8),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            teacher,
-            style: const TextStyle(fontSize: 13, color: Colors.black87),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            timeRange,
-            style: const TextStyle(fontSize: 13, color: Colors.black54),
-          ),
-        ],
+            ),
+            // --- The lesson content ---
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      lesson.subject,
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Time Row
+                    Row(
+                      children: [
+                        Icon(Icons.access_time_filled,
+                            size: 16, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${lesson.startTime} - ${lesson.endTime}',
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // Teacher Row
+                    Row(
+                      children: [
+                        Icon(Icons.person, size: 16, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Text(
+                          lesson.teacherName,
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+// --- 5. DUMMY DATA (TO BE REPLACED WITH FIREBASE) ---
+// This is your hardcoded data, structured by day.
+// You should fetch this from your `timetables` collection.
+
+final _dummyTimetable = {
+  'Mon': [
+    TimetableEntry(
+        subject: 'Math',
+        teacherName: 'Mr. John Doe',
+        startTime: '08:00 AM',
+        endTime: '09:00 AM',
+        color: Colors.blue.shade300),
+    TimetableEntry(
+        subject: 'English',
+        teacherName: 'Ms. Jane Smith',
+        startTime: '09:00 AM',
+        endTime: '10:00 AM',
+        color: Colors.red.shade300),
+    TimetableEntry(
+        subject: 'Science',
+        teacherName: 'Dr. R. Brown',
+        startTime: '10:30 AM',
+        endTime: '11:30 AM',
+        color: Colors.green.shade300),
+  ],
+  'Tue': [
+    TimetableEntry(
+        subject: 'Social Studies',
+        teacherName: 'Mr. A. Davis',
+        startTime: '08:00 AM',
+        endTime: '09:00 AM',
+        color: Colors.orange.shade300),
+    TimetableEntry(
+        subject: 'Kiswahili',
+        teacherName: 'Mrs. W. Otieno',
+        startTime: '09:00 AM',
+        endTime: '10:00 AM',
+        color: Colors.purple.shade300),
+  ],
+  'Wed': [
+    TimetableEntry(
+        subject: 'Math',
+        teacherName: 'Mr. John Doe',
+        startTime: '08:00 AM',
+        endTime: '09:00 AM',
+        color: Colors.blue.shade300),
+    TimetableEntry(
+        subject: 'Science',
+        teacherName: 'Dr. R. Brown',
+        startTime: '10:30 AM',
+        endTime: '11:30 AM',
+        color: Colors.green.shade300),
+  ],
+  'Thu': [
+    TimetableEntry(
+        subject: 'English',
+        teacherName: 'Ms. Jane Smith',
+        startTime: '09:00 AM',
+        endTime: '10:00 AM',
+        color: Colors.red.shade300),
+    TimetableEntry(
+        subject: 'Kiswahili',
+        teacherName: 'Mrs. W. Otieno',
+        startTime: '10:30 AM',
+        endTime: '11:30 AM',
+        color: Colors.purple.shade300),
+  ],
+  'Fri': [
+    TimetableEntry(
+        subject: 'Social Studies',
+        teacherName: 'Mr. A. Davis',
+        startTime: '08:00 AM',
+        endTime: '09:00 AM',
+        color: Colors.orange.shade300),
+  ],
+};

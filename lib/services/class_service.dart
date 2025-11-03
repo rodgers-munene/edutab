@@ -108,4 +108,41 @@ class ClassService {
       return [];
     }
   }
+
+  // Add these methods to your existing ClassService class
+
+  Future<List<ClassModel>> getAllClasses() async {
+    try {
+      final querySnapshot = await _firestore.collection('classes').get();
+      return querySnapshot.docs
+          .map((doc) => ClassModel.fromMap(doc.data(), doc.id))
+          .toList();
+    } catch (e) {
+      print("Error fetching all classes: $e");
+      return [];
+    }
+  }
+
+  Future<void> deleteClass(String classId) async {
+    try {
+      await _firestore.collection('classes').doc(classId).delete();
+      print('Class deleted successfully');
+    } catch (e) {
+      print('Error deleting class: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> updateClass(ClassModel classModel) async {
+    try {
+      await _firestore
+          .collection('classes')
+          .doc(classModel.id)
+          .update(classModel.toMap());
+      print('Class updated successfully');
+    } catch (e) {
+      print('Error updating class: $e');
+      rethrow;
+    }
+  }
 }
